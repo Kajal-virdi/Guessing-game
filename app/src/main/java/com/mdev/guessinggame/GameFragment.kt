@@ -14,6 +14,7 @@ class GameFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var viewModel : GameViewModel
+    lateinit var viewModelFactory: GameViewModelFactory
 
 
     override fun onCreateView(
@@ -21,7 +22,9 @@ class GameFragment : Fragment() {
     ): View? {
         _binding = FragmentGameBinding.inflate(inflater, container, false);
         val view = binding.root;
-        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        viewModelFactory = GameViewModelFactory();
+
+        viewModel = ViewModelProvider(this, GameViewModelFactory()).get(GameViewModel::class.java)
 
         updateScreen()
 
